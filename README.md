@@ -6,12 +6,12 @@ Microtask queue scheduler for the browser. Falls back to
 `window.requestAnimationFrame` in environments that don't allow
 `MutationObserver` based scheduling.
 
-The microtask queue is a set of tasks that runs at the start of the next frame
-in the browser. This is analogous to `process.setImmediate()` in Node. There's
-no direct API for the microtask queue in the browser, but using
-`document.MutationObserver` we can trick the browser into running functions as
-part of the microtask queue. This is useful to create tight, 60fps loops in the
-main browser thread.
+The microtask queue is a set of tasks that runs at the end of the current frame
+in the browser, before recalculating style and painting. This is analogous to
+`process.nextTick()` in Node. There's no direct API for the microtask queue in
+the browser, but using `document.MutationObserver` we can trick the browser
+into running functions as part of the microtask queue. This is useful to create
+tight, 60fps loops in the main browser thread.
 
 ## Usage
 ```js
