@@ -2,7 +2,7 @@
   "name": "nanotask",
   "description": "Microtask queue scheduler for the browser",
   "repository": "yoshuawuyts/nanotask",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "start": "node .",
