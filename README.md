@@ -2,32 +2,26 @@
 [![npm version][2]][3] [![build status][4]][5]
 [![downloads][8]][9] [![js-standard-style][10]][11]
 
-Microtask queue scheduler for the browser. Falls back to
-`window.requestAnimationFrame` in environments that don't allow
-`MutationObserver` based scheduling.
+Microtask queue scheduler for the browser.
 
 The microtask queue is a set of tasks that runs at the end of the current frame
 in the browser, before recalculating style and painting. This is analogous to
 `process.nextTick()` in Node. There's no direct API for the microtask queue in
-the browser, but using `document.MutationObserver` we can trick the browser
-into running functions as part of the microtask queue. This is useful to create
-tight, 60fps loops in the main browser thread.
+the browser, but using `Promise.resolve()` we can trick the browser into running
+functions as part of the microtask queue. This is useful to create tight, 60fps
+loops in the main browser thread.
 
 ## Usage
 ```js
 var nanotask = require('nanotask')
-var queue = nanotask()
 
-queue(function () {
+nanotask(() => {
   console.log('resolved at the start of the next frame')
 })
 ```
 
 ## API
-### `queue = nanotask()`
-Create a new Nanotask instance.
-
-### `queue(fn)`
+### `nanotask(fn)`
 Queue a function on the browser's microtask queue.
 
 ## Installation
