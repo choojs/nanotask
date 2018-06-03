@@ -6,12 +6,11 @@ function nanotask () {
   var i = 0
 
   new window.MutationObserver(function () {
-    for (var i = 0; i < queue.length; i++) queue[i]()
-    queue = []
+    while (queue.length) queue.shift()()
   }).observe(node, { characterData: true })
 
   return function (fn) {
     queue.push(fn)
-    node.data = (i = ++i % 2)
+    node.data = (i = 1 - i)
   }
 }
